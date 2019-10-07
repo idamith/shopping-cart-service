@@ -1,12 +1,13 @@
 package com.idotrick.shoppingcartservice.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
-public class ShoppingCart {
+public class ShoppingCart implements Serializable {
   @Id
   @GeneratedValue
   private int id;
@@ -16,11 +17,12 @@ public class ShoppingCart {
   @OneToMany(mappedBy = "cartItemId.shoppingCart", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private Set<CartItem> cartItems = new HashSet<>();
 
-  public enum Status {
+  public enum Status implements Serializable {
     DRAFT, CANCELLED, PAYMENT_PENDING, PAYMENT_RECEIVED, SHIPPING_SCHEDULED, SHIPPED, DELIVERED, DELIVERY_CONFIRMED;
   }
 
-  public ShoppingCart(){}
+  public ShoppingCart() {
+  }
 
   public ShoppingCart(Customer customer) {
     this.customer = customer;

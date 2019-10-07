@@ -1,12 +1,13 @@
 package com.idotrick.shoppingcartservice.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Customer {
+public class Customer implements Serializable {
   @Id
   @GeneratedValue
   private Integer id;
@@ -21,7 +22,8 @@ public class Customer {
     MALE, FEMALE;
   }
 
-  public Customer(){}
+  public Customer() {
+  }
 
   public Customer(String name, Sex sex, Contact contact) {
     this.name = name;

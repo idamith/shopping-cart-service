@@ -1,26 +1,24 @@
-package com.idotrick.shoppingcartservice.model;
+package com.idotrick.shoppingcartservice.message;
 
-import org.springframework.beans.factory.annotation.Value;
-
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
 
 public class ItemSelectMessage implements Serializable {
   @GeneratedValue
   private int id;
-  private ShoppingCart shoppingCart;
-  private Product product;
+  private int shoppingCartId;
+  private int customerId;
+  private int productId;
   private int count;
 
   public ItemSelectMessage() {
   }
 
-  public ItemSelectMessage(ShoppingCart shoppingCart, Product product, int count) {
-    this.shoppingCart = shoppingCart;
-    this.product = product;
+  public ItemSelectMessage(int shoppingCartId, int customerId, int productId, int count) {
+    this.shoppingCartId = shoppingCartId;
+    this.customerId = customerId;
+    this.productId = productId;
     this.count = count;
   }
 
@@ -32,20 +30,28 @@ public class ItemSelectMessage implements Serializable {
     this.id = id;
   }
 
-  public ShoppingCart getShoppingCart() {
-    return shoppingCart;
+  public int getShoppingCartId() {
+    return shoppingCartId;
   }
 
-  public void setShoppingCart(ShoppingCart shoppingCart) {
-    this.shoppingCart = shoppingCart;
+  public void setShoppingCartId(int shoppingCartId) {
+    this.shoppingCartId = shoppingCartId;
   }
 
-  public Product getProduct() {
-    return product;
+  public int getCustomerId() {
+    return customerId;
   }
 
-  public void setProduct(Product product) {
-    this.product = product;
+  public void setCustomerId(int customerId) {
+    this.customerId = customerId;
+  }
+
+  public int getProductId() {
+    return productId;
+  }
+
+  public void setProductId(int productId) {
+    this.productId = productId;
   }
 
   public int getCount() {
@@ -73,8 +79,9 @@ public class ItemSelectMessage implements Serializable {
   public String toString() {
     return "ItemSelectMessage{" +
         "id=" + id +
-        ", shoppingCart=" + shoppingCart +
-        ", product=" + product +
+        ", shoppingCartId=" + shoppingCartId +
+        ", customerId=" + customerId +
+        ", productId=" + productId +
         ", count=" + count +
         '}';
   }

@@ -3,11 +3,11 @@ package com.idotrick.shoppingcartservice.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.math.BigDecimal;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class Product {
+public class Product implements Serializable {
   @Id
   @GeneratedValue
   private int id;
@@ -15,7 +15,8 @@ public class Product {
   private String productCategory;
   private double price;
 
-  public Product(){}
+  public Product() {
+  }
 
   public Product(String description, String productCategory, double price) {
     this.description = description;

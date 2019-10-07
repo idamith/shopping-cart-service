@@ -4,9 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import java.io.Serializable;
 
 @Entity
-public class Contact {
+public class Contact implements Serializable {
   @Id
   @GeneratedValue
   private int id;
@@ -17,7 +18,8 @@ public class Contact {
   private int phoneNumber;
   private String email;
 
-  public Contact(){}
+  public Contact() {
+  }
 
   public Contact(Customer customer, Address shippingAddress, int phoneNumber, String email) {
     this.customer = customer;

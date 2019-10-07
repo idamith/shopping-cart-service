@@ -1,7 +1,9 @@
 package com.idotrick.shoppingcartservice;
 
 import com.idotrick.shoppingcartservice.demo.ShoppingItemSelectService;
-import com.idotrick.shoppingcartservice.repository.*;
+import com.idotrick.shoppingcartservice.service.ItemSelectMessageReceiveService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -9,11 +11,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class ShoppingCartServiceApplication implements CommandLineRunner {
+  private static Logger log = LoggerFactory.getLogger(ShoppingCartServiceApplication.class);
 
   @Autowired
   ShoppingItemSelectService shoppingItemSelectService;
   @Autowired
-  ItemSelectMessageProcessService itemSelectMessageProcessService;
+  ItemSelectMessageReceiveService itemSelectMessageProcessService;
 
   public static void main(String[] args) {
     SpringApplication.run(ShoppingCartServiceApplication.class, args);
@@ -21,12 +24,10 @@ public class ShoppingCartServiceApplication implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
-    System.out.println(". . . . . . W E L C O M E T-O M-I~N-I M-A~R-T . . . . . . . .");
+    log.info(". . . . . . W E L C O M E T-O M-I~N-I M-A~R-T . . . . . . . .");
 
-    System.out.println(shoppingItemSelectService.simulateBatchItemSelect());
-    shoppingItemSelectService.simulateBatchItemSelect().stream()
-        .forEach(message -> itemSelectMessageProcessService.execute(message));
+    shoppingItemSelectService.simulateBatchItemSelect();
 
-    System.out.println(". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ");
+    log.info(". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ");
   }
 }

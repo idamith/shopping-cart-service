@@ -4,9 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import java.io.Serializable;
 
 @Entity
-public class Address {
+public class Address implements Serializable {
   @Id
   @GeneratedValue
   private int id;
@@ -20,7 +21,8 @@ public class Address {
   @OneToOne(mappedBy = "shippingAddress")
   private Contact contact;
 
-  public Address(){}
+  public Address() {
+  }
 
   public Address(String line1, String line2, String line3, String country, String province, String city, String postalCode) {
     this.line1 = line1;
