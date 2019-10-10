@@ -14,7 +14,7 @@ The code should:
 
 # Solution
 
-## Setup
+## Setup and run
 
 `clone https://github.com/idotrick/shopping-cart-service.git`
 
@@ -23,6 +23,11 @@ Import shopping-cart-service project to IDE
 OR
 
 `cd shopping-cart-service` and `mvn compile`
+
+Run as a conventional **SpringBoot** application though IDE or command line.
+
+`java -jar target/shopping-cart-service-0.0.1-SNAPSHOT.jar` <br>
+`java -jar -Dspring.profiles.active=standalone target/shopping-cart-service-0.0.1-SNAPSHOT.jar`
 
 ## Profiles
 
