@@ -1,12 +1,11 @@
 package com.idotrick.shoppingcartservice.message;
 
-import javax.persistence.GeneratedValue;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 public class ItemSelectMessage implements Serializable {
-  @GeneratedValue
-  private int id;
+  private long id;
   private int shoppingCartId;
   private int customerId;
   private int productId;
@@ -16,17 +15,18 @@ public class ItemSelectMessage implements Serializable {
   }
 
   public ItemSelectMessage(int shoppingCartId, int customerId, int productId, int count) {
+    this.id = new Timestamp(System.currentTimeMillis()).getTime();
     this.shoppingCartId = shoppingCartId;
     this.customerId = customerId;
     this.productId = productId;
     this.count = count;
   }
 
-  public int getId() {
+  public long getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(long id) {
     this.id = id;
   }
 
