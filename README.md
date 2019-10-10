@@ -1,4 +1,4 @@
-# Problem
+# Problem | Shopping Cart Microservice
 
 - Imagine you are working on a shopping Cart component, when user choose a product, it will be published to a message queue.
 
@@ -36,7 +36,7 @@ Activate relevant profile through JVM argument `spring.profiles.active=standalon
 
 ## Solution features
 
-### -  Test coverage.
+### -  Good Test coverage.
 
 ### -  The app does't lose message if the database connections goes down
 
