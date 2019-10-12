@@ -1,8 +1,8 @@
-# Problem | Shopping Cart Microservice
+# Problem: Shopping Cart Microservice
 
 - Imagine you are working on a shopping Cart component, when user choose a product, it will be published to a message queue.
 
--  You are developing a micro service component which receives message from message queue, save it into database. You can use embedded database/jms for illustration purpose.
+- You are developing a micro service component which receives message from message queue, save it into database. You can use embedded database/jms for illustration purpose.
 
 The code should:
 
