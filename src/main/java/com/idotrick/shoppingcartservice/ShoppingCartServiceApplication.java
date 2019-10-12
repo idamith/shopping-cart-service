@@ -15,8 +15,6 @@ public class ShoppingCartServiceApplication implements CommandLineRunner {
 
   @Autowired
   ShoppingItemSelectService shoppingItemSelectService;
-  @Autowired
-  ItemSelectMessageReceiveService itemSelectMessageProcessService;
 
   public static void main(String[] args) {
     SpringApplication.run(ShoppingCartServiceApplication.class, args);
