@@ -52,6 +52,21 @@ Run as a conventional **SpringBoot** application though IDE or command line.
 `java -jar target/shopping-cart-service-0.0.1-SNAPSHOT.jar` <br>
 `java -jar -Dspring.profiles.active=standalone target/shopping-cart-service-0.0.1-SNAPSHOT.jar`
 
+OR
+
+Use Docker
+
+```docker
+docker pull dawalk/shopping-cart-service
+docker run -t dawalk/shopping-cart-service
+```
+
+If require h2-console run
+
+```
+docker run -p 8080:8080 -t dawalk/shopping-cart-service
+```
+
 ## Profiles
 
 For demonstration purpose, following profiles are configured. Default profile is configured for demonstration of
