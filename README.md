@@ -43,6 +43,11 @@ Activate relevant profile through JVM argument `spring.profiles.active=standalon
 
 ### -  Good Test coverage.
 
+Solution is unit tested strongly with,
+- JUnit
+- Mockito
+- AssertJ
+
 ### -  The app does't lose message if the database connections goes down
 
 JMS Broker **ActiveMQ** ensures delivery of messages regardless the consistency of database connection. If any
@@ -68,5 +73,11 @@ and scalability.
 Several replicas/nodes of this microservice shall be configured to run in production with the support of orchestration 
 tools such as DockerSwarm or Kubernetes. In a failure of one or more nodes still the system is capable of running.
 Because of the usage of ***Message Queue*** messages will be processed consistently when a node becomes available.
+
+### - Containerized
+
+## Notes
+
+### Spring MVC enabled for Spring Dev Tools
 
 
