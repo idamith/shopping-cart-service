@@ -1,20 +1,24 @@
 # Contents
 
-- [Problem: Shopping Cart Microservice](#Problem)
-- [Solution](#Solution)
-    - [Architecture](##Architecture)
-    - [Setup and run](##Setup and run)
-    - [Profiles](#Profiles)
-    - [Solution features](#Solution features)
-        - [Good Test coverage](#Good Test coverage)
-        - [The app does't lose message if the database connections goes down](#The app does't lose message if the database connections goes down)
-        - [The app is able to auto create table if the table doesn't exist in database](#The app is able to auto create table if the table doesn't exist in database)
-        - [Self healing from database issue without human intervention](#Self healing from database issue without human intervention)
-        - [Good fault tolerate](#Good fault tolerate)
-        - [Containarized](#Containarized)
-    - [Notes](#Notes)
+- [Contents](#contents)
+- [Problem](#problem)
+  - [Shopping Cart Microservice](#shopping-cart-microservice)
+- [Solution](#solution)
+  - [Architecture](#architecture)
+  - [Setup and run](#setup-and-run)
+  - [Profiles](#profiles)
+  - [Solution features](#solution-features)
+    - [Good Test coverage](#good-test-coverage)
+    - [The app does't lose message if the database connections goes down](#the-app-doest-lose-message-if-the-database-connections-goes-down)
+    - [The app is able to auto create table if the table doesn't exist in database](#the-app-is-able-to-auto-create-table-if-the-table-doesnt-exist-in-database)
+    - [Self healing from database issue without human intervention](#self-healing-from-database-issue-without-human-intervention)
+    - [Good fault tolerate](#good-fault-tolerate)
+    - [Containerized](#containerized)
+  - [Notes](#notes)
+    - [Spring MVC is enabled for Spring Dev Tools](#spring-mvc-is-enabled-for-spring-dev-tools)
 
-# Problem     
+# Problem
+
 ## Shopping Cart Microservice
 
 - Imagine you are working on a shopping Cart component, when user choose a product, it will be published to a message queue.
@@ -63,6 +67,7 @@ Activate relevant profile through JVM argument `spring.profiles.active=standalon
 ### Good Test coverage
 
 Solution is unit tested strongly with,
+
 - JUnit
 - Mockito
 - AssertJ
@@ -74,24 +79,24 @@ exception occurred inside the listener message will not be acknowledged and rede
 message is unable to be persisted configured number of times, it will move to a **Dead Queue** in the ActiveMQ. That
 message will be persisted for further manual inquiries.
 
-> Refer to the listener implementation ***ItemSelectMessageReceiveService.java***<br>
-> maximumRedeliveries are configurable as demonstrated in ***application-standalone.properties***     
+> Refer to the listener implementation **_ItemSelectMessageReceiveService.java_**<br>
+> maximumRedeliveries are configurable as demonstrated in **_application-standalone.properties_**
 
 ### The app is able to auto create table if the table doesn't exist in database
 
-Application uses JPA and default spring-hibernate configuration therefore it doesn't expect a schema to be existed. 
-While app generates schema on startup if doesn't exist it also loads test data with the help of ***data.sql***.
+Application uses JPA and default spring-hibernate configuration therefore it doesn't expect a schema to be existed.
+While app generates schema on startup if doesn't exist it also loads test data with the help of **_data.sql_**.
 
 ### Self healing from database issue without human intervention
 
-No human intervention is required for database. In production database shall be run in a cluster for better availability 
+No human intervention is required for database. In production database shall be run in a cluster for better availability
 and scalability.
 
 ### Good fault tolerate
 
-Several replicas/nodes of this microservice shall be configured to run in production with the support of orchestration 
+Several replicas/nodes of this microservice shall be configured to run in production with the support of orchestration
 tools such as DockerSwarm or Kubernetes. In a failure of one or more nodes still the system is capable of running.
-Because of the usage of ***Message Queue*** messages will be processed consistently when a node becomes available.
+Because of the usage of **_Message Queue_** messages will be processed consistently when a node becomes available.
 
 ### Containerized
 
@@ -109,5 +114,3 @@ docker run -p 8080:8080 -t dawalk/shopping-cart-service
 ## Notes
 
 ### Spring MVC is enabled for Spring Dev Tools
-
-
