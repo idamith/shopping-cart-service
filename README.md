@@ -1,4 +1,21 @@
-# Problem: Shopping Cart Microservice
+# Contents
+
+- [Problem: Shopping Cart Microservice](#Problem)
+- [Solution](#Solution)
+    - [Architecture](##Architecture)
+    - [Setup and run](##Setup and run)
+    - [Profiles](#Profiles)
+    - [Solution features](#Solution features)
+        - [Good Test coverage](#Good Test coverage)
+        - [The app does't lose message if the database connections goes down](#The app does't lose message if the database connections goes down)
+        - [The app is able to auto create table if the table doesn't exist in database](#The app is able to auto create table if the table doesn't exist in database)
+        - [Self healing from database issue without human intervention](#Self healing from database issue without human intervention)
+        - [Good fault tolerate](#Good fault tolerate)
+        - [Containarized](#Containarized)
+    - [Notes](#Notes)
+
+# Problem     
+## Shopping Cart Microservice
 
 - Imagine you are working on a shopping Cart component, when user choose a product, it will be published to a message queue.
 
@@ -13,6 +30,8 @@ The code should:
 5. Good fault tolerate.
 
 # Solution
+
+## Architecture
 
 ## Setup and run
 
@@ -41,14 +60,14 @@ Activate relevant profile through JVM argument `spring.profiles.active=standalon
 
 ## Solution features
 
-### -  Good Test coverage.
+### Good Test coverage
 
 Solution is unit tested strongly with,
 - JUnit
 - Mockito
 - AssertJ
 
-### -  The app does't lose message if the database connections goes down
+### The app does't lose message if the database connections goes down
 
 JMS Broker **ActiveMQ** ensures delivery of messages regardless the consistency of database connection. If any
 exception occurred inside the listener message will not be acknowledged and redeliver to the client again. If the
@@ -58,26 +77,37 @@ message will be persisted for further manual inquiries.
 > Refer to the listener implementation ***ItemSelectMessageReceiveService.java***<br>
 > maximumRedeliveries are configurable as demonstrated in ***application-standalone.properties***     
 
-### -  The app is able to auto create table if the table doesn't exist in database
+### The app is able to auto create table if the table doesn't exist in database
 
 Application uses JPA and default spring-hibernate configuration therefore it doesn't expect a schema to be existed. 
 While app generates schema on startup if doesn't exist it also loads test data with the help of ***data.sql***.
 
-### - Self-healing from database issue without human intervention
+### Self healing from database issue without human intervention
 
 No human intervention is required for database. In production database shall be run in a cluster for better availability 
 and scalability.
 
-### - Good fault tolerate
+### Good fault tolerate
 
 Several replicas/nodes of this microservice shall be configured to run in production with the support of orchestration 
 tools such as DockerSwarm or Kubernetes. In a failure of one or more nodes still the system is capable of running.
 Because of the usage of ***Message Queue*** messages will be processed consistently when a node becomes available.
 
-### - Containerized
+### Containerized
+
+```docker
+docker pull dawalk/shopping-cart-service
+docker run -t dawalk/shopping-cart-service
+```
+
+If require h2-console run
+
+```
+docker run -p 8080:8080 -t dawalk/shopping-cart-service
+```
 
 ## Notes
 
-### Spring MVC enabled for Spring Dev Tools
+### Spring MVC is enabled for Spring Dev Tools
 
 
